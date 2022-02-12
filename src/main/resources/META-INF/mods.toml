@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+[[mods]]
+modId="commandshortcut"
+version="1.0.0"
+displayName="CommandShortcut"
+authors="tedo0627"
+description="Add shortcut key to execute the command."
+[[dependencies.examplemod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2,1.18.1]"
+    ordering="NONE"
+    side="BOTH"
