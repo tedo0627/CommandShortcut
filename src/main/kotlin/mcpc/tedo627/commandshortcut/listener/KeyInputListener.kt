@@ -20,9 +20,9 @@ class KeyInputListener(private val manager: ShortcutManager) {
     }
 
     private fun press(key: Int, action: Int) {
-        if (Minecraft.getInstance().currentScreen != null) return
-
         if (action == 0) pressKeys.remove(key)
+
+        if (Minecraft.getInstance().currentScreen != null) return
         if (action != 1) return
 
         pressKeys.add(key)
