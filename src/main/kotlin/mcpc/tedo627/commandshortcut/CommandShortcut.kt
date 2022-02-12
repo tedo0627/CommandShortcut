@@ -1,7 +1,7 @@
 package mcpc.tedo627.commandshortcut
 
 import mcpc.tedo627.commandshortcut.listener.KeyInputListener
-import mcpc.tedo627.commandshortcut.listener.RegisterCommandListener
+import mcpc.tedo627.commandshortcut.listener.OpenSettingGuiListener
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent
@@ -25,6 +25,6 @@ class CommandShortcut {
     private fun complete(event: FMLLoadCompleteEvent) {
         shortcut = ShortcutManager()
         MinecraftForge.EVENT_BUS.register(KeyInputListener(shortcut))
-        MinecraftForge.EVENT_BUS.register(RegisterCommandListener(shortcut))
+        MinecraftForge.EVENT_BUS.register(OpenSettingGuiListener(shortcut))
     }
 }

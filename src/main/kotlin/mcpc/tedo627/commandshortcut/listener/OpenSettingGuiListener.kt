@@ -4,14 +4,22 @@ import com.mojang.brigadier.Command
 import mcpc.tedo627.commandshortcut.ShortcutManager
 import mcpc.tedo627.commandshortcut.gui.ShortcutSettingGui
 import net.minecraft.client.Minecraft
+import net.minecraft.client.settings.KeyBinding
 import net.minecraft.command.Commands
+import net.minecraftforge.client.event.InputEvent
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent
 
-class RegisterCommandListener(private val manager: ShortcutManager) {
+class OpenSettingGuiListener(private val manager: ShortcutManager) {
 
     private var openScreen = false
+    private val key = KeyBinding("open shortcut settings key", -1, "CommandShortcut")
+
+    init {
+        ClientRegistry.registerKeyBinding(key)
+    }
 
     @SubscribeEvent
     fun onFMLServerStarting(event: FMLServerStartingEvent) {
@@ -28,6 +36,15 @@ class RegisterCommandListener(private val manager: ShortcutManager) {
         if (!openScreen) return
 
         openScreen = false
+        Minecraft.getInstance().displayGuiScreen(ShortcutSettingGui(manager))
+    }
+
+    @SubscribeEvent
+    fun onKeyInput(event: InputEvent.KeyInputEvent) {
+        if (event.action != 1) return
+        if (event.key != key.key.keyCode) return
+        if (Minecraft.getInstance().currentScreen != null) return
+
         Minecraft.getInstance().displayGuiScreen(ShortcutSettingGui(manager))
     }
 }
